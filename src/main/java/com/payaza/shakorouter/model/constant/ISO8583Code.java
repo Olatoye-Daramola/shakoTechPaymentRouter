@@ -1,0 +1,47 @@
+package com.payaza.shakorouter.model.constant;
+
+import lombok.Getter;
+
+@Getter
+public enum ISO8583Code {
+
+    SUCCESSFUL("00"),
+    INVALID_MERCHANT("03"), // same as service provider
+    INVALID_SERVICE_PROVIDER("03"), // same as a merchant
+    DO_NOT_HONOR("05"),
+    GENERAL_ERROR("06"),
+    REQUEST_IN_PROGRESS("09"),
+    INVALID_TRANSACTION("12"),
+    INVALID_AMOUNT("13"),
+    INVALID_ACCOUNT_NUMBER("14"),
+    NO_ISSUER("15"),
+    INSUFFICIENT_FUNDS("16"),
+    UNABLE_TO_LOCATE_RECORD("25"),
+    TRANSACTION_FAILURE("25"),
+    FORMAT_ERROR("30"),
+    INSUFFICIENT_FUNDS_51("51"),
+    EXPIRED_CARD("54"),
+    INCORRECT_PIN("55"),
+    TRANSACTION_NOT_PERMITTED_ON_CARD("57"),
+    TRANSACTION_NOT_ALLOWED("58"),
+    SUSPECTED_FRAUD("59"),
+    SECURITY_VIOLATION("63"),
+    ACTIVITY_COUNT_EXCEEDED("65"),
+    RESPONSE_RECEIVED_TOO_LATE("68"),
+    PIN_RETRIES_EXCEEDED("75"),
+    UNABLE_TO_VERIFY_PIN("83"),
+    ISSUER_SWITCH_INOPERATIVE("91"),
+    DUPLICATE_OR_CONFLICT("94"),
+    RECONCILE_ERROR("95"),
+    SYSTEM_ERROR("96"),
+    INVALID_BILLER_INFO("P2"),
+    CARD_AUTH_FAILURE("Q1"),
+    DECLINED_CVV2_FAILURE("N7");
+
+    private final String code;
+
+    ISO8583Code(final String code) {
+        this.code = code;
+    }
+
+}

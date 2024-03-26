@@ -16,12 +16,12 @@
 
 ### Running the application
 1. clone the repository
-1. run your application
-2. yeah, it's that straightforward...provided that you have JDK installed on your machine.
-
+2. run your application
 ```sh
 gradlew bootRun
 ```
+3. Note that you must have the Java JRE library on your machine.
+
 ### Create user
 ```sh
 curl --location 'http://localhost:8082/api/v1/users/create' \
@@ -114,9 +114,7 @@ curl --location 'http://localhost:8082/api/v1/transactions/create' \
 <br><br>
 
 ## Author
-
 👤 **olatoye-daramola**
-
 * Github: [@olatoye-daramola](https://github.com/olatoye-daramola)
 * LinkedIn: [Olatoye Daramola](https://www.linkedin.com/in/olatoye-daramola/)
 

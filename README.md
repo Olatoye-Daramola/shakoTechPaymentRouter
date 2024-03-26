@@ -22,16 +22,47 @@
 ```sh
 gradlew bootRun
 ```
-
-### Run the tests
-
+### Create user
 ```sh
-gradlew test
+curl --location 'http://localhost:8082/api/v1/users/create' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+"username": "toye",
+"password": "olatoye",
+"email": "toye@gmail.en",
+"firstName": "Olatoye",
+"lastName": "Daramola",
+"phoneNumber": "1234567890",
+"isActive": true
+}'
 ```
+### Create country tenant
+```sh
+curl --location --request POST 'http://localhost:8082/api/v1/tenants/create/Burkina_Faso' \
+--header 'Authorization: Basic dG95ZTpvbGF0b3ll'
+```
+### Create transaction
+```sh
+curl --location 'http://localhost:8082/api/v1/transactions/create' \
+--header 'X-Country-Code: Burkina_Faso' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Basic dG95ZTpvbGF0b3ll' \
+--data '{
+  "sessionId": "SS-1235",
+  "accountNumber": "0113801890",
+  "transactionAmount": 10.0,
+  "vatAmount": 0.0,
+  "feeAmount": 0.0,
+  "settledAmount": 10.0,
+  "settlementId": "ST-12345",
+  "transactionRemark": "String"
+}'
+```
+
 -----------------------------------------------------------------------------
 ## MULTI-TENANCY
-> Multi-tenancy is a design approach where numerous groups of users, called tenants, can utilize a single software instance and underlying infrastructure.
-> Its aim is to allocate each tenant their own portion of the instance while safeguarding the segregation of their respective information.<br><br>
+> Multi-tenancy is a design approach where individual groups of users, called tenants, can utilize a single software instance and its underlying infrastructure.
+> Its aim is to allocate each tenant their own portion of the instance while safeguarding and segregating their respective information.<br><br>
 > Every tenant gets a personalized share of the application instance including its data, configuration, user management, 
 > tenant-specific functional and non-functional properties. Due to efficient resource sharing among tenants, multi-tenancy
 > can reduce the overall cost of running a software/application due to the fact that there is no dedicated resource for each tenant.<br><br>
@@ -53,23 +84,31 @@ gradlew test
 > isolation, improving the privacy and security of their data.
 > <br><br>
 > <b>Shared Database, Shared Schema Multi-tenancy</b><br>
-> This form/model is directly opposite the first form. The database and application instance are physically shared but the
-> their data is logically isolated. As much as it saves on database resources, it provides the least level of security. 
-> There is a big chance that the separate tenants can access each other's data by chance as the only discriminator would 
-> be a table field. It is the easiest to set up in a multi-tenant application.
+> This form/model is directly opposite the first form. The database and application instance are physically shared but
+> their data is logically isolated, using a discriminator column. As much as it saves on database resources, it provides
+> the least level of security. There is a big chance that the separate tenants can access each other's data by chance as
+> the basic separating instance for every tenant would be the discriminator field. It is the easiest to set up in a multi-tenant
+> application.
 > <br><br>
-> <b>Share Database, Separate Schema</b>
+> <b>Share Database, Separate Schema Multi-tenancy</b><br>
 > It is a compromise point between the first two forms. While it provides the security and isolation in database-per-tenant
 > multi-tenancy, it also offers the simplicity of a shared database. It is set up similarly to database-per-tenant multi-tenancy.
+> Tenants share the same database but own different schema, thereby giving the feel of segregated data. So, even though
+> the tenants' data are on the same database, they are isolated by schema, which is like an abstraction of tables, views,
+> and other database metadata within the database itself.
 > <br><br>
 -----------------------------------------------------------------------------
 ## API SECURITY
-> 1. Validate the input fields in the request body, path variables, and query parameters
+> 1. Validate the input fields in the request body, path variables, and query parameters. Also, for APIs that accept file
+> upload, Java provides a method that restricts Path traversal attacks using the File.getCanonicalPath() method
 > 2. Apply authentication to restrict access to the APIs, and authorization to limit the parts of the application a user
-> can access
-> 3. Apply SSL/TLS certificates to encrypt data in transit, while also applying encryption means on sensitive data at rest.
-> 4. Apply rate-limiting measures to prevent malicious users from overloading the API in a DDOS attack
-> 5. Use logging and monitoring to track and identify potential security threats. 
+> can access using role-based privileges
+> 3. Apply SSL/TLS certificates to encrypt data in transit, while also applying modern encryption algorithms on sensitive data at rest
+> 4. Apply rate-limiting and throttling measures to prevent malicious users from overloading the API in a DDOS attack. Rate limiting can also
+> be achieved through the use of API gateway which could provide authentication and authorization for every service the application
+> provides
+> 5. Use logging and monitoring mechanisms to track and identify potential security threats, keeping an up-to-date registry
+> of malicious patterns.
 
 -----------------------------------------------------------------------------
 <br><br>

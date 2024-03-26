@@ -28,9 +28,9 @@ gradlew bootRun
 ```sh
 gradlew test
 ```
-
+-----------------------------------------------------------------------------
 ## MULTI-TENANCY
-> Multi-tenancy is a design approach where numerous tenants can utilize a single software instance and underlying infrastructure.
+> Multi-tenancy is a design approach where numerous groups of users, called tenants, can utilize a single software instance and underlying infrastructure.
 > Its aim is to allocate each tenant their own portion of the instance while safeguarding the segregation of their respective information.<br><br>
 > Every tenant gets a personalized share of the application instance including its data, configuration, user management, 
 > tenant-specific functional and non-functional properties. Due to efficient resource sharing among tenants, multi-tenancy
@@ -38,6 +38,41 @@ gradlew test
 > It offers data privacy and infrastructure in such a way that a security breach in a database does not cascade to other 
 > tenant's database due to the level of data separation.isolation. Also, it simplifies maintenance and upgrades as updates and maintenance can be applied to all tenants simultaneously, paving way for software
 > version standardization.
+> ### Forms
+> There are several forms of multi-tenancy, and the 3 major forms are:
+> 1. Separate Database, Separate Schema (Database-per-tenant) Multi-tenancy
+> 2. Shared Database, Shared Schema Multi-tenancy
+> 3. Shared Database, Separate Schema (Schema-per-tenant) Multi-tenancy.
+><br><br>
+>
+> <b>Separate Database, Shared Schema Multi-tenancy</b><br>
+> In this type of multi-tenancy, while each tenant have the same instance of the application, an individual database is 
+> created and assigned to each tenant, hence, the databases are isolated from each tenant. Their data is physically separated.
+> It affords the tenant the ability to customize their database to their use cases. It is usually not easy to set up as 
+> there are complexities in setting up the separate database infrastructure.However, tenants get a higher level of data 
+> isolation, improving the privacy and security of their data.
+> <br><br>
+> <b>Shared Database, Shared Schema Multi-tenancy</b><br>
+> This form/model is directly opposite the first form. The database and application instance are physically shared but the
+> their data is logically isolated. As much as it saves on database resources, it provides the least level of security. 
+> There is a big chance that the separate tenants can access each other's data by chance as the only discriminator would 
+> be a table field. It is the easiest to set up in a multi-tenant application.
+> <br><br>
+> <b>Share Database, Separate Schema</b>
+> It is a compromise point between the first two forms. While it provides the security and isolation in database-per-tenant
+> multi-tenancy, it also offers the simplicity of a shared database. It is set up similarly to database-per-tenant multi-tenancy.
+> <br><br>
+-----------------------------------------------------------------------------
+## API SECURITY
+> 1. Validate the input fields in the request body, path variables, and query parameters
+> 2. Apply authentication to restrict access to the APIs, and authorization to limit the parts of the application a user
+> can access
+> 3. Apply SSL/TLS certificates to encrypt data in transit, while also applying encryption means on sensitive data at rest.
+> 4. Apply rate-limiting measures to prevent malicious users from overloading the API in a DDOS attack
+> 5. Use logging and monitoring to track and identify potential security threats. 
+
+-----------------------------------------------------------------------------
+<br><br>
 
 ## Author
 

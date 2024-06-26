@@ -34,8 +34,8 @@ public class TransactionServiceImpl implements TransactionService {
         //save transaction
         transaction.setCountry(CountryCode.getCountryCode(TenantContext.getTenantId()));
         transaction.setStatus(TransactionStatus.INITIATED);
-        logInfo("TenantContext.getTenantId() ==> " + TenantContext.getTenantId());
-        logInfo("TenantContext.Transaction ==> " + transaction.toString());
+        logInfo("TransactionService.createTransaction", "TenantContext.getTenantId() ==> " + TenantContext.getTenantId());
+        logInfo("TransactionService.createTransaction","TenantContext.Transaction ==> " + transaction.toString());
         transactionRepository.save(transaction);
         //call MgTech API here
         transaction.setStatus(TransactionStatus.SUCCESSFUL);

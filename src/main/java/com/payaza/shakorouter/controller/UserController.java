@@ -30,7 +30,7 @@ public class UserController {
     public ResponseEntity<ApiResponse> createUser(@NotNull(message = "Valid request body is required") @Valid
                                                   @RequestBody CreateUserDto request, @ApiIgnore Errors errors) {
         logRequest("UserController.createUser", request.toString());
-        logError(errors);
+        logError("UserController.createUser", errors);
         ApiResponse response = userService.createUser(request);
         logResponse("UserController.createUser", response.toString());
         return ResponseEntity.ok(response);

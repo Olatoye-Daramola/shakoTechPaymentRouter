@@ -24,17 +24,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ApiResponse createUser(CreateUserDto createUserDto) {
-        logInfo("CREATE USER DTO ==> " + createUserDto);
+        logInfo("UserService.createUser","CREATE USER DTO ==> " + createUserDto);
         User userToCreate= userRepository.findByUsernameOrEmail(createUserDto.getUsername(), createUserDto.getEmail())
                 .orElseGet(() -> {
                     createUserDto.setPassword(passwordEncoder.encode(createUserDto.getPassword()));
                     return new Gson().fromJson(new Gson().toJson(createUserDto), User.class);
                 });
-        logInfo("CREATED USER ==> " + userToCreate);
+        logInfo("UserService.createUser", "CREATED USER ==> " + userToCreate);
         if (userToCreate.getId() > 0) throw new UserAlreadyExistsException(createUserDto);
 
         User savedUser = userRepository.save(userToCreate);
-        logInfo("SAVED USER ==> " + savedUser);
+        logInfo("UserService.createUser", "SAVED USER ==> " + savedUser);
         return new ApiResponse();
     }
 }

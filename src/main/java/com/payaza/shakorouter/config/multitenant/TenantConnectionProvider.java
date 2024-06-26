@@ -29,15 +29,13 @@ public class TenantConnectionProvider implements MultiTenantConnectionProvider {
     @Override
     public Connection getConnection(String tenantIdentifier) throws SQLException {
         final Connection connection = getAnyConnection();
-        connection.createStatement()
-                .execute(String.format("SET SCHEMA \"%s\";", tenantIdentifier));
+        connection.setSchema(tenantIdentifier);
         return connection;
     }
 
     @Override
     public void releaseConnection(String tenantIdentifier, Connection connection) throws SQLException {
-        connection.createStatement()
-                .execute(String.format("SET SCHEMA \"%s\";", TenantIdentifierResolver.DEFAULT_TENANT));
+        connection.setSchema(TenantIdentifierResolver.DEFAULT_TENANT);
         releaseAnyConnection(connection);
     }
 

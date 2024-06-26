@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS TRANSACTIONS
 (
-    id                              BIGINT PRIMARY KEY AUTO_INCREMENT,
+--    id                              BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id                              BIGSERIAL PRIMARY KEY,
     country                         VARCHAR(36) NOT NULL,
     referenceNumber                 VARCHAR(36) NOT NULL UNIQUE,
     sessionId                       VARCHAR(255) NOT NULL,

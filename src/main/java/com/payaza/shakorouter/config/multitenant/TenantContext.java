@@ -10,7 +10,7 @@ public class TenantContext {
 
     public static void setTenantId(String tenantId) {
         currentTenant.set(tenantId);
-        logInfo("Successfully set current tenant to => " + tenantId);
+        logInfo("TenantContext.setTenantId", "Successfully set current tenant to => " + tenantId);
     }
 
     public static String getTenantId() {

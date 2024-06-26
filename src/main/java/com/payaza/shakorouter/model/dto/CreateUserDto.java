@@ -29,8 +29,6 @@ public class CreateUserDto {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    @NotNull(message = "IsActive is required")
-    private boolean isActive;
 
     @Override
     public String toString() {

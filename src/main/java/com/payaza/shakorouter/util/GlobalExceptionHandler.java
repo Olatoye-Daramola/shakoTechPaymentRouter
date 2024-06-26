@@ -25,11 +25,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = {UserAlreadyExistsException.class, ValidationFailedException.class,
             HttpMessageNotReadableException.class, MissingHeaderAttributeException.class, IllegalArgumentException.class})
     public ResponseEntity<?> badRequestError(Exception ex) {
-        logError(ex);
+        if (!(ex instanceof MissingHeaderAttributeException)) logError(ex);
         ApiResponse response = new ApiResponse();
         response.setError(true);
         response.setStatus(ApiResponseStatus.FAILED.getStatus());
-        response.setMessage(ex.getMessage());
+        response.setMessage(ex.getMessage().split("=> ")[1]);
         if (ex instanceof HttpMessageNotReadableException) response.setMessage("Bad request body");
         response.setResponseCode(ISO8583Code.FORMAT_ERROR.getCode());
         return ResponseEntity.badRequest().body(response);
@@ -54,7 +54,7 @@ public class GlobalExceptionHandler {
         ApiResponse response = new ApiResponse();
         response.setError(true);
         response.setStatus(ApiResponseStatus.FAILED.getStatus());
-        response.setMessage(ex.getMessage());
+        response.setMessage(ex.getMessage().split("=> ")[1]);
         response.setResponseCode(ISO8583Code.SECURITY_VIOLATION.getCode());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
     }

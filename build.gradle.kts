@@ -30,7 +30,8 @@ dependencies {
 
     implementation("io.springfox:springfox-boot-starter:3.0.0")
     implementation("org.flywaydb:flyway-core")
-    runtimeOnly("com.h2database:h2")
+    implementation("org.postgresql:postgresql")
+//    runtimeOnly("com.h2database:h2")
     implementation("org.json:json:20240303")
     implementation("com.google.code.gson:gson:2.10.1")
 

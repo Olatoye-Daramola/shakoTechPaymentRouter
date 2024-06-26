@@ -27,7 +27,7 @@ public class TransactionController {
     public ResponseEntity<ApiResponse> createTransaction(@NotNull(message = "Valid request body is required") @Valid
                                                          @RequestBody TransactionDto request, @ApiIgnore Errors errors) {
         logRequest("TransactionController.createTransaction", request.toString());
-        logError(errors);
+        logError("TransactionController.createTransaction", errors);
         ApiResponse response = transactionService.createTransaction(request);
         logResponse("TransactionController.createTransaction", response.toString());
         return ResponseEntity.ok(response);

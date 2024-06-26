@@ -7,11 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.validation.Errors;
 
-import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 public class CustomLogger {
-    private static final ObjectMapper mapper = new ObjectMapper();
     private static final Logger logger = LoggerFactory.getLogger(CustomLogger.class);
 
     public static void logInfo(String methodName, String message) {

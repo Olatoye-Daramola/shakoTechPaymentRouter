@@ -3,13 +3,12 @@ package com.payaza.shakorouter.controller;
 import com.payaza.shakorouter.model.dto.ApiResponse;
 import com.payaza.shakorouter.model.dto.TransactionDto;
 import com.payaza.shakorouter.service.transaction.TransactionService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 import static com.payaza.shakorouter.util.CustomLogger.*;
 

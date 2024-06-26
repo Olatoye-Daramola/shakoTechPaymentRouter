@@ -1,7 +1,7 @@
 package com.payaza.shakorouter.config.multitenant;
 
 import com.payaza.shakorouter.ShakoRouterApplication;
-import org.hibernate.MultiTenancyStrategy;
+//import org.hibernate.MultiTenancyStrategy;
 import org.hibernate.cfg.Environment;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
@@ -26,7 +26,8 @@ public class HibernateConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaProperties jpaProperties,
-                                                                       MultiTenantConnectionProvider multiTenantConnectionProvider, CurrentTenantIdentifierResolver tenantIdentifierResolver) {
+                                                                       MultiTenantConnectionProvider multiTenantConnectionProvider,
+                                                                       CurrentTenantIdentifierResolver tenantIdentifierResolver) {
 
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
@@ -34,7 +35,7 @@ public class HibernateConfig {
         em.setJpaVendorAdapter(jpaVendorAdapter());
 
         Map<String, Object> jpaPropertiesMap = new HashMap<>(jpaProperties.getProperties());
-        jpaPropertiesMap.put(Environment.MULTI_TENANT, MultiTenancyStrategy.SCHEMA);
+//        jpaPropertiesMap.put(Environment.MULTI_TENANT, MultiTenancyStrategy.SCHEMA);
         jpaPropertiesMap.put(Environment.MULTI_TENANT_CONNECTION_PROVIDER, multiTenantConnectionProvider);
         jpaPropertiesMap.put(Environment.MULTI_TENANT_IDENTIFIER_RESOLVER, tenantIdentifierResolver);
         em.setJpaPropertyMap(jpaPropertiesMap);

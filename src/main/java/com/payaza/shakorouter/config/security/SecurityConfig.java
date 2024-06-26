@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,15 +37,15 @@ public class SecurityConfig {
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
 
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
-                .authorizeRequests(auth -> auth
-                        .antMatchers(UNSECURED_PATHS).permitAll()
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(UNSECURED_PATHS).permitAll()
                         .anyRequest().authenticated())
                 .authenticationManager(authenticationManager)
                 .exceptionHandling(handler -> handler.accessDeniedHandler(accessDeniedHandler()))
-                .httpBasic().and()
+                .httpBasic(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .headers().frameOptions().disable()
+                .headers(head -> head.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
         ;
 
         return httpSecurity.build();

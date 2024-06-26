@@ -2,14 +2,16 @@ package com.payaza.shakorouter.config.interceptor;
 
 import com.payaza.shakorouter.config.multitenant.TenantContext;
 import com.payaza.shakorouter.util.exception.MissingHeaderAttributeException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+//import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
